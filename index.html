@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSIHOTEL • Connexion</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div style="display:flex;gap:16px">
+    <a href="index.html">Connexion</a>
+    <a href="procedures.html">Procédures</a>
+    <a href="dashboard.html">Espace client</a>
+  </div>
+
+  <main class="container">
+    <h1>Connexion</h1>
+    <p class="muted">Accès réservé aux clients DSIHOTEL.</p>
+
+    <section class="card">
+      <form id="loginForm" class="form">
+        <label>Email
+          <input type="email" name="email" required placeholder="client@hotel.com">
+        </label>
+        <label>Mot de passe
+          <input type="password" name="password" required placeholder="••••••••">
+        </label>
+        <button class="btn" type="submit">Se connecter</button>
+        <p id="err" class="error" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="assets/js/auth.js"></script>
+  <script>
+    const form = document.getElementById("loginForm");
+    const err = document.getElementById("err");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      err.hidden = true;
+      const email = form.email.value.trim().toLowerCase();
+      const password = form.password.value;
+
+      if (!Auth.login(email, password)) {
+        err.textContent = "Email ou mot de passe incorrect.";
+        err.hidden = false;
+        return;
+      }
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>
