@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <!-- Navigation obligatoire -->
   <div style="display:flex;gap:16px">
     <a href="index.html">Connexion</a>
     <a href="procedures.html">Procédures</a>
@@ -14,17 +15,33 @@
   </div>
 
   <main class="container">
-    <h1>Connexion</h1>
-    <p class="muted">Accès réservé aux clients DSIHOTEL.</p>
+
+    <!-- LOGO -->
+    <div class="logo-container">
+      <a href="https://www.dsihotel.com" target="_blank">
+        <img
+          src="assets/img/dsihotel-logo.avif"
+          alt="DSIHOTEL"
+          class="logo"
+        />
+      </a>
+    </div>
+
+    <h1>Connexion client</h1>
+    <p class="muted">
+      Merci de vous identifier pour accéder aux procédures informatiques.
+    </p>
 
     <section class="card">
       <form id="loginForm" class="form">
         <label>Email
           <input type="email" name="email" required placeholder="client@hotel.com">
         </label>
+
         <label>Mot de passe
           <input type="password" name="password" required placeholder="••••••••">
         </label>
+
         <button class="btn" type="submit">Se connecter</button>
         <p id="err" class="error" hidden></p>
       </form>
@@ -33,12 +50,15 @@
 
   <script src="assets/js/auth.js"></script>
   <script>
+    if (Auth.user()) window.location.href = "dashboard.html";
+
     const form = document.getElementById("loginForm");
     const err = document.getElementById("err");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       err.hidden = true;
+
       const email = form.email.value.trim().toLowerCase();
       const password = form.password.value;
 
@@ -47,6 +67,7 @@
         err.hidden = false;
         return;
       }
+
       window.location.href = "dashboard.html";
     });
   </script>
